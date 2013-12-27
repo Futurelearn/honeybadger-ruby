@@ -255,7 +255,7 @@ Feature: Install the Gem in a Rails application
     And the request should not contain "blue42"
     And the request session should contain "FILTERED"
 
-  Scenario: Filtering session and params based on Rails parameter filters
+  Scenario: Filtering session and query params based on Rails parameter filters
     When I configure my application to require Honeybadger
     And I configure Honeybadger with:
       """
@@ -271,7 +271,7 @@ Feature: Install the Gem in a Rails application
       raise RuntimeError, "some message"
       """
     And I route "/test/index" to "test#index"
-    And I perform a request to "http://example.com:123/test/index?param=value"
+    And I perform a request to "http://example.com:123/test/index?param=value&secret=red23"
     Then I should receive a Honeybadger notification
     And the request should not contain "red23"
     And the request should not contain "blue42"
